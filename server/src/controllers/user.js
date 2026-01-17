@@ -32,7 +32,6 @@ export const getUserProfile = async (req, res) => {
     }
 };
 
-// controllers/auth.js
 export const signOut = async (req, res) => {
     try {
         // 1) Passport logout (nếu bạn dùng passport session)

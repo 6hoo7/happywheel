@@ -8,20 +8,19 @@ import Spin from "../models/spinHistory.js";
  * @param {Array} gifts
  * @returns gift | null
  */
-function randomGift(gifts) {
-    const total = gifts.reduce((sum, g) => sum + g.probability, 0);
-    const rand = Math.random() * total;
 
+function randomGift(gifts) {
+    const rand = Math.random(); // 0 → 1
     let cumulative = 0;
+
     for (const gift of gifts) {
         cumulative += gift.probability;
         if (rand <= cumulative) {
-            return gift;
+            return gift; // trúng
         }
     }
 
-    // không trúng gì
-    return null;
+    return null; // trượt → chúc may mắn
 }
 
 export const spinWheel = async (req, res) => {
@@ -51,7 +50,9 @@ export const spinWheel = async (req, res) => {
                 { type: "point" },
                 { type: "physical", quantity: { $gt: 0 } }
             ]
-        }).session(session);
+        })
+            .select("name type value probability quantity")
+            .session(session);
 
         if (!gifts.length) {
             await session.abortTransaction();
