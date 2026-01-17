@@ -32,6 +32,7 @@ import authGoogleRouter from "./routers/authGoogle.js";
 import authFacebookRouter from "./routers/authFacebook.js";
 import userRouter from "./routers/user.js";
 import spinRouter from "./routers/spin.js";
+import giftRouter from "./routers/getGifts.js"
 import cors from "cors";
 import morgan from 'morgan';
 
@@ -54,6 +55,8 @@ app.use("/auth", authFacebookRouter);
 app.use("/api", userRouter);
 
 app.use("/api", spinRouter);
+
+app.use("/api", giftRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello, server is running!");
