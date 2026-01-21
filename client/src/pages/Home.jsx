@@ -296,29 +296,7 @@ export default function Home() {
           </div>
         </div>
       )}
-
-      {/* ===== Modal thể lệ ===== */}
-      {showRuleForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-[420px]">
-            <h2 className="text-2xl font-bold mb-4 text-center text-green-600">
-              📜 Thể lệ trò chơi
-            </h2>
-            <ul className="list-decimal list-inside space-y-2 text-gray-700">
-              <li>Mỗi lượt quay chỉ dùng 1 lần.</li>
-              <li>Kết quả được xác định từ hệ thống.</li>
-              <li>Điểm được cộng ngay khi trúng.</li>
-              <li>Quà vật lý cần xác nhận nhận quà.</li>
-            </ul>
-            <button
-              onClick={() => setShowRuleForm(false)}
-              className="mt-6 w-full py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
-            >
-              Đóng
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
+//congminh
