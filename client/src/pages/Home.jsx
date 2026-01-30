@@ -143,13 +143,9 @@ import { API_URL } from "../configAPI";
 export default function Home() {
   const [wheelData, setWheelData] = useState([]);
   const [giftList, setGiftList] = useState([]);
-
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-
-  const [showGiftForm, setShowGiftForm] = useState(false);
   const [showRuleForm, setShowRuleForm] = useState(false);
-
   const [announcement, setAnnouncement] = useState("");
   const [userInfo, setUserInfo] = useState({ spins: 0, points: 0 });
 
@@ -237,10 +233,20 @@ export default function Home() {
 
       <div className="flex flex-col items-center gap-6 pt-12">
         {/* Thông tin user */}
-        <div className="flex gap-6 text-lg font-semibold">
-          <div>🎯 Lượt quay: {userInfo.spins}</div>
-          <div>⭐ Điểm: {userInfo.points}</div>
-        </div>
+        <div className="flex gap-6 px-8 py-4 rounded-2xl
+                bg-white/70 backdrop-blur-md
+                shadow-xl border border-white/40
+                text-lg font-bold text-gray-700">
+  <div className="flex items-center gap-2">
+    🎯 <span>Lượt quay:</span>
+    <span className="text-indigo-600">{userInfo.spins}</span>
+  </div>
+  <div className="flex items-center gap-2">
+    ⭐ <span>Điểm:</span>
+    <span className="text-yellow-500">{userInfo.points}</span>
+  </div>
+</div>
+
 
         {/* Container vòng quay */}
         <div className="relative">
@@ -253,15 +259,12 @@ export default function Home() {
             <FaQuestionCircle className="text-green-500" size={26} />
           </button>
 
-          {/* Icon quà */}
-          <button
-            onClick={() => setShowGiftForm(true)}
-            className="absolute -top-10 -right-10 p-3 bg-white/60 backdrop-blur
-                       rounded-xl shadow hover:scale-110 transition z-20"
-          >
-            <FaGift className="text-yellow-500" size={26} />
-          </button>
-
+          <div className="relative flex items-center justify-center">
+  {/* Glow */}
+  <div className="absolute w-[420px] h-[420px]
+                  rounded-full
+                  bg-gradient-to-tr from-purple-400 via-pink-400 to-yellow-300
+                  blur-3xl opacity-30 animate-pulse" />
           <SpinWheel
             wheelData={wheelData}
             mustSpin={mustSpin}
@@ -269,27 +272,26 @@ export default function Home() {
             onSpin={handleSpinClick}
             onStop={() => setMustSpin(false)}
           />
+          </div>
         </div>
       </div>
 
-      {/* ===== Modal đổi quà ===== */}
-      {showGiftForm && (
+      {/* ===== Modal thể lệ ===== */}
+      {showRuleForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-96">
-            <h2 className="text-2xl font-bold mb-4 text-center">🎁 Quà có thể đổi</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {giftList.map((g) => (
-                <div
-                  key={g._id}
-                  className="border rounded-xl p-3 text-center font-semibold shadow"
-                >
-                  {g.name}
-                </div>
-              ))}
-            </div>
+          <div className="bg-white rounded-2xl p-6 w-[420px]">
+            <h2 className="text-2xl font-bold mb-4 text-center text-green-600">
+              📜 Thể lệ trò chơi
+            </h2>
+            <ul className="list-decimal list-inside space-y-2 text-gray-700">
+              <li>Mỗi lượt quay chỉ dùng 1 lần.</li>
+              <li>Kết quả được xác định từ hệ thống.</li>
+              <li>Điểm được cộng ngay khi trúng.</li>
+              <li>Quà vật lý cần xác nhận nhận quà.</li>
+            </ul>
             <button
-              onClick={() => setShowGiftForm(false)}
-              className="mt-6 w-full py-2 bg-red-500 text-white rounded-xl hover:bg-red-600"
+              onClick={() => setShowRuleForm(false)}
+              className="mt-6 w-full py-2 bg-black text-white rounded-xl hover:bg-blue-600"
             >
               Đóng
             </button>
@@ -299,4 +301,3 @@ export default function Home() {
     </div>
   );
 }
-//congminh

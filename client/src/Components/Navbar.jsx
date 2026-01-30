@@ -41,7 +41,7 @@
 
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaUser, FaSignOutAlt, FaStar, FaUserCircle } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaStar, FaUserCircle, FaGift } from "react-icons/fa";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Navbar = () => {
@@ -89,48 +89,70 @@ const Navbar = () => {
 
           {/* Dropdown */}
           {open && (
-            <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in">
-              {/* Profile */}
-              <div className="flex items-center gap-3 p-4 border-b">
-                <img
-                  src={user.picture}
-                  alt="avatar"
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-semibold text-gray-800">{user.name}</p>
-                  <p className="text-xs text-gray-500">Tài khoản cá nhân</p>
-                </div>
-              </div>
-              {/* Profile */}
-              <Link
-                  to="/profile"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 text-gray-700"
-                >
-                  <FaUserCircle />
-                  Thông tin cá nhân
-              </Link>
+  <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in">
+    {/* Profile */}
+    <div className="flex items-center gap-3 p-4 border-b">
+      <img
+        src={user.picture}
+        alt="avatar"
+        className="w-12 h-12 rounded-full object-cover"
+      />
+      <div>
+        <p className="font-semibold text-gray-800">{user.name}</p>
+        <p className="text-xs text-gray-500">Tài khoản cá nhân</p>
+      </div>
+    </div>
 
-              {/* Points */}
-              <div className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100 cursor-pointer">
-                <FaStar className="text-yellow-500" />
-                <span>
-                  Tổng điểm đã nhận:{" "}
-                  <b className="text-gray-900">{user.totalPoints || 0}</b>
-                </span>
-              </div>
+    {/* Thông tin cá nhân */}
+    <Link
+      to="/profile"
+      onClick={() => setOpen(false)}
+      className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 text-gray-700"
+    >
+      <FaUserCircle />
+      Thông tin cá nhân
+    </Link>
 
-              {/* Logout */}
-              <button
-                onClick={signOut}
-                className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 transition"
-              >
-                <FaSignOutAlt />
-                Đăng xuất
-              </button>
-            </div>
-          )}
+    {/* Lịch sử quay thưởng */}
+    <Link
+      to="/spin-history"
+      onClick={() => setOpen(false)}
+      className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 text-gray-700"
+    >
+      <FaStar className="text-yellow-500" />
+      Lịch sử quay thưởng
+    </Link>
+
+    {/* Đổi quà */}
+    <Link
+      to="/redeem"
+      onClick={() => setOpen(false)}
+      className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 text-gray-700"
+    >
+      <FaGift className="text-emerald-500" />
+      Đổi quà
+    </Link>
+
+    {/* Điểm */}
+    <div className="flex items-center gap-3 px-4 py-3 text-gray-700 border-t">
+      <FaStar className="text-yellow-500" />
+      <span>
+        Tổng điểm đã nhận:{" "}
+        <b className="text-gray-900">{user.totalPoints || 0}</b>
+      </span>
+    </div>
+
+    {/* Logout */}
+    <button
+      onClick={signOut}
+      className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 transition"
+    >
+      <FaSignOutAlt />
+      Đăng xuất
+    </button>
+  </div>
+)}
+
         </div>
       )}
     </nav>
