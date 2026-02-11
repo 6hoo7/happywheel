@@ -1,5 +1,6 @@
 # Ẩn file môi trường
 .env
+.env.docker
 
 # Bỏ qua thư mục node_modules
 node_modules/

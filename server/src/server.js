@@ -65,8 +65,8 @@ app.get("/", (req, res) => {
 const startServer = async () => {
     await connectDB(process.env.DB_URI);
 
-    app.listen(PORT, () => {
-        console.log(`🚀 Server is running at http://localhost:${PORT}`);
+    app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
+        console.log('Server running on port 3000');
     });
 };
 
